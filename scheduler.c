@@ -180,7 +180,6 @@ int hrn(process *pro,int n,int *solution){
 
 	if (mkdir(OUTPUT_DATA_DIR, 0755) == -1 && errno != EEXIST) {
 		printf("Can't create directory in: \"%s\"\nError detected: %s\n", OUTPUT_DATA_DIR, strerror(errno));
-		return;
 	}
 	FILE *fp = fopen(path, "w+");
 	
