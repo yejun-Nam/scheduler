@@ -303,7 +303,7 @@ int main() {
 
 				resort(ready_queue, n);
 
-				printf("\n3. Shortest Job First(SJF) : Non-preemption\n==================== SJF_non ====================\n");
+				printf("\n4. Highest Response Ratio Next(HRN) :\n==================== hrn ====================\n");
 
 				printf("P#     AT     BT     Pri     WT     TAT\n");
 
