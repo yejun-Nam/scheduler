@@ -216,7 +216,7 @@ int main() {
 
 	printf("프로세스 개수 : %d",n);
 
-	printf("\n==================== Main Menu ====================\n\n1. Read processes from proc.txt\n2. Generate random processes\n3. Shortest Job First(SJF) : Non-preemption\n4. Exit\n===================================================\n");
+	printf("\n==================== Main Menu ====================\n\n1. Read processes from proc.txt\n2. Generate random processes\n3. Shortest Job First(SJF) : Non-preemption\n4. Highest Response Ratio Next(HRN) : Non-preemption\n5. Exit\n===================================================\n");
 
 	while(1){
 		int ch = 0;
@@ -314,6 +314,9 @@ int main() {
 
 					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].priority, ready_queue[i].wait_t, ready_queue[i].ta_t);
 				}
+				printf("반환시간 평균 : %.2f\n",tat/n);
+				printf("대기시간 평균 : %.2f\n\n",waitt/n);
+
 				continue;
 				break;
 
