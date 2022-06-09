@@ -165,13 +165,12 @@ int hrn(process *pro,int n,int *solution){
 				printf("현재 %d 번째 계산중인 temp%d\n",i,temp);
 				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
 				if(hrr < temp){
-					// storing the response ratio
 					hrr =temp;
-					// storing the location
 					loc = i;
 				}
 			}
 		}
+		printf("time : %d , hrr: %d\n",time,hrr)
 
 		// updating the time value
 		time += pro[loc].burst_t;
