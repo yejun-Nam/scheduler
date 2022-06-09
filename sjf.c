@@ -162,7 +162,7 @@ int hrn(process *pro,int n,int *solution){
 
 				// calculate the response ratio
 				temp = (pro[i].burst_t + (time - pro[i].arrive_t)) / pro[i].burst_t;
-
+				printf("현재 i 번째 계산중인 temp%d",temp)
 				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
 				if(hrr < temp){
 					// storing the response ratio
@@ -182,7 +182,6 @@ int hrn(process *pro,int n,int *solution){
 		pro[loc].ta_t = time - pro[loc].arrive_t;
 
 		pro[loc].complete = 1;
-		printf("loc, %d",loc);
 		solution[ac] = loc + 1;
 		ac += 1; 
 
