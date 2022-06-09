@@ -139,9 +139,11 @@ int hrn(process *pro,int n){
 	int sp;
 	int loc;
 
+	
+	// initialization
 	for (int k=0; k < n; k++){
 		sum_bt += pro[k].burst_t; 
-		printf("start calculate burst time");
+		pro[k].complete = 0;
 	}
 
 	for (time = pro[0].arrive_t; time < sum_bt; ){
@@ -164,12 +166,9 @@ int hrn(process *pro,int n){
 				//checking for the higest response ratio
 
 				if(hrr < temp){
-
 					// storing the response ratio
 					hrr =temp;
-
 					// storing the location
-
 					loc = i;
 				}
 			}
@@ -209,7 +208,6 @@ int main() {
 		fscanf(fp, "%d", &ready_queue[i].arrive_t);
 		fscanf(fp, "%d", &ready_queue[i].burst_t);
 		fscanf(fp, "%d", &ready_queue[i].priority);
-		ready_queue[i].complete = 0;
 		index = index + 1;
 		printf("%d\n", index);
 		i++;
