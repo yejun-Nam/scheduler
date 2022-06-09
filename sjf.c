@@ -201,6 +201,8 @@ int main() {
 	FILE *fp;
 	fp = fopen("proc.txt","r");
 	process ready_queue[MAXSIZE];
+	int solution[MAXSIZE];
+
 
 	printf("파일 읽기 시작\n");
 
@@ -297,7 +299,6 @@ int main() {
 
 				break;
 			case 4:
-				int solution[MAXSIZE];
 				arr_sort(ready_queue, n);
 
 				hrn(ready_queue, n,&solution);
