@@ -140,7 +140,7 @@ int hrn(process *pro,int n){
 	int loc;
 
 	for (int k=0; k < n; k++){
-		sum_bt += pro[k].wait_t; 
+		sum_bt += pro[k].burst_t; 
 		printf("start calculate burst time");
 	}
 
