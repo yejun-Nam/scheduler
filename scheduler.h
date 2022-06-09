@@ -6,7 +6,8 @@
 # include <stdlib.h>
 #include <errno.h>
 #include <string.h>
-
+#include <sys/stat.h>
+#include <sys/types.h>
 // hrn
 #define OUTPUT_DATA_DIR "./data/gantt"
 #define OUTPUT_HRN_DATA_NAME "hrn_gantt.txt"
