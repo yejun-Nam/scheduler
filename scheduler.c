@@ -190,14 +190,13 @@ int hrn(process *pro,int n,int *solution){
 	// start_time = arrive_time + waiting_time
 	// state_time 부터 burst time 만큼 프린트해줌 실행순서 순서로
 	for (int j = 0 ; j < pro[solution[0] - 1].arrive_t; j++){
-		fputs("0 ",fp);
+		fputs("0",fp);
 	}
 
 	
 	for(int j =0 ; j < n ; j++){
 		for(int m = 0 ; m < pro[solution[j] - 1].burst_t ; m++){
-			fputs((char)solution[j],fp);
-			fputs(" ",fp);
+			fputs(solution[j] + '0',fp);
 		}
 	}
 
