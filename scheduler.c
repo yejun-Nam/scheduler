@@ -170,8 +170,7 @@ int hrn(process *pro,int n,int *solution){
 	}
 
 	// write gantt
-	// start_time = arrive_time + waiting_time
-	// state_time 부터 burst time 만큼 프린트해줌 실행순서 순서로
+	
 
 	char *path = malloc(sizeof(char) * (strlen(OUTPUT_DATA_DIR) + strlen(OUTPUT_HRN_DATA_NAME)) + 2);
 	strcpy(path, OUTPUT_DATA_DIR);
@@ -188,8 +187,19 @@ int hrn(process *pro,int n,int *solution){
 	}
 
 	// 적는 부분
+	// start_time = arrive_time + waiting_time
+	// state_time 부터 burst time 만큼 프린트해줌 실행순서 순서로
+	for (int j = 0 ; j < pro[solution[0] - 1].arrive_t; j++){
+		fputs("0 ",fp);
+	}
+
 	
-	fputs("asd",fp);
+	for(int j =0 ; j < n ; j++){
+		for(int m = 0 ; m < pro[solution[j] - 1].burst_t ; m++){
+			fputs(solution[j],fp);
+			fputs(" ",fp);
+		}
+	}
 
 }
 
