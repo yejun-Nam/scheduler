@@ -1,6 +1,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # define MAXSIZE 1000
+# define MINHRR -9999
 
 // 프로세스 정보 담은 구조체
 typedef struct process {
@@ -133,12 +134,12 @@ int sjf_non(process *pro, int n) {
 int hrn(process *pro,int n,int *solution){
 	int time;
 	int ta_avg, wait_avg = 0;
-	int i, j  , sum_bt = 0;
+	int i, j , sum_bt = 0;
 	int sp;
 	int loc;
+	int ac = 0; // solution counter
 	process temp;
 
-	int ac = 0;
 
 	// 초기화
 	for (int k=0; k < n; k++){
@@ -147,23 +148,19 @@ int hrn(process *pro,int n,int *solution){
 	}
 
 	for (time = pro[0].arrive_t; time < sum_bt; ){
-		// MINIMUM hrr 선언
-		float hrr = -9999;
+		float hrr = MINHRR;
 
-		// The Response Ratio Variable
+		// Ratio Variable 을 임시적으로 저장
 		float temp;
-
-		// variable used to store the next process selected
 
 		for (i = 0; i < n; i++){
 
-			// check if the process has arrived and is Incomplete
+			// 도착한 프로세스가 있고, 완료되지 않았는지 판단
 			if(pro[i].arrive_t <= time && pro[i].complete != 1){
 
-				// calculate the response ratio
-				printf("%d의 bt %d wt %d",i+1,pro[i].burst_t,time-pro[i].arrive_t);
+				//  Response ratio 계산
 				temp = (double)(pro[i].burst_t + (time - pro[i].arrive_t)) / pro[i].burst_t;
-				printf("현재 %d 번째 계산중인 temp%f\n",i + 1,temp);
+				
 				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
 				if(hrr < temp){
 					hrr =temp;
@@ -171,17 +168,19 @@ int hrn(process *pro,int n,int *solution){
 				}
 			}
 		}
-		printf("time : %d , hrr: %f\n",time,hrr);
 
-		// updating the time value
+		// 방금 선택된 프로세스의 burst time 을 이용해 시간 업데이트
 		time += pro[loc].burst_t;
 
-		// calculation of the waiting time
+		// 대기 시간 계산
 		pro[loc].wait_t = time - pro[loc].arrive_t - pro[loc].burst_t;
-		//calculation of the turn  around time
+		// 반환 시간 계산
 		pro[loc].ta_t = time - pro[loc].arrive_t;
 
+		// 프로세스 완료 선언
 		pro[loc].complete = 1;
+
+		// 실행순서 출력을 위한 배열에 추가
 		solution[ac] = loc + 1;
 		ac += 1; 
 
@@ -198,7 +197,7 @@ int main() {
 	float tat;
 	float waitt;	
 	FILE *fp;
-	fp = fopen("proc.txt","r");
+	fp = fopen("sample_process.txt","r");
 	process ready_queue[MAXSIZE];
 	int solution[MAXSIZE];
 
@@ -223,7 +222,7 @@ int main() {
 
 	printf("프로세스 개수 : %d",n);
 
-	printf("\n==================== Main Menu ====================\n\n1. Read processes from proc.txt\n2. Generate random processes\n3. Shortest Job First(SJF) : Non-preemption\n4. Highest Response Ratio Next(HRN) : Non-preemption\n5. Exit\n===================================================\n");
+	printf("\n==================== Main Menu ====================\n\n1. Read processes from sample_process.txt\n2. Generate random processes\n3. Shortest Job First(SJF) : Non-preemption\n4. Highest Response Ratio Next(HRN) : Non-preemption\n5. Exit\n===================================================\n");
 
 	while(1){
 		int ch = 0;
@@ -298,7 +297,6 @@ int main() {
 
 				break;
 			case 4:
-				// arr_sort(ready_queue, n);
 
 				hrn(ready_queue, n,solution);
 
@@ -312,14 +310,12 @@ int main() {
 
 				printf("\n4. Highest Response Ratio Next(HRN) :\n==================== hrn ====================\n");
 
-				printf("P#     AT     BT     Pri     WT     TAT\n");
+				printf("P#\tAT\tBT\tWT\tTAT\nNTT");
 
 				for(i = 0; i < n; i++) {
-
 					tat = tat + ready_queue[i].ta_t;
 					waitt = waitt + ready_queue[i].wait_t;
-
-					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].priority, ready_queue[i].wait_t, ready_queue[i].ta_t);
+					printf("%d\t%d\t%d\t%d\t%d\t%f\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t ,(double)ready_queue[i].ta_t / ready_queue[i].burst_t[i]);
 				}
 				printf("반환시간 평균 : %.2f\n",tat/n);
 				printf("대기시간 평균 : %.2f\n\n",waitt/n);
