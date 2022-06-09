@@ -79,7 +79,7 @@ int process_generate(process *pro, int n) {
 		if(!found) break;
 	}
 
-	fprintf(fp2, "\r\n%d %d %d %d", pro[i].number, pro[i].arrive_t, pro[i].burst_t);
+	fprintf(fp2, "\r\n%d %d %d", pro[i].number, pro[i].arrive_t, pro[i].burst_t);
 
 	fclose(fp2);
 }
@@ -223,7 +223,7 @@ int main() {
 				printf("P#     AT     BT     Pri\n");
 
 				for(i = 0; i < n; i++) {
-					printf("%d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t);
+					printf("%d     %d    %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t);
 				}
 
 				printf("==============================================\n\n\n");
