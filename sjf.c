@@ -130,24 +130,24 @@ int sjf_non(process *pro, int n) {
 }
 
 // hrn 알고리즘 그때 
-int hrn(process *pro,int n){
-	printf("start hrn");
+int hrn(process *pro,int n,int *solution){
 	int time;
 	int ta_avg, wait_avg = 0;
 	int i, j  , sum_bt = 0;
-	process temp;
 	int sp;
 	int loc;
+	process temp;
 
-	
-	// initialization
+	int ac = 0;
+
+	// 초기화
 	for (int k=0; k < n; k++){
 		sum_bt += pro[k].burst_t; 
 		pro[k].complete = 0;
 	}
 
 	for (time = pro[0].arrive_t; time < sum_bt; ){
-		// set the lower limit to response ratio
+		// MINIMUM hrr 선언
 		float hrr = -9999;
 
 		// The Response Ratio Variable
@@ -163,8 +163,7 @@ int hrn(process *pro,int n){
 				// calculate the response ratio
 				temp = (pro[i].burst_t + (time - pro[i].arrive_t)) / pro[i].burst_t;
 
-				//checking for the higest response ratio
-
+				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
 				if(hrr < temp){
 					// storing the response ratio
 					hrr =temp;
@@ -179,11 +178,13 @@ int hrn(process *pro,int n){
 
 		// calculation of the waiting time
 		pro[loc].wait_t = time - pro[loc].arrive_t - pro[loc].burst_t;
-		printf("%d",pro[loc].wait_t);
 		//calculation of the turn  around time
 		pro[loc].ta_t = time - pro[loc].arrive_t;
 
 		pro[loc].complete = 1;
+
+		solution[ac] = loc;
+		ac += 1; 
 
 	}
 
@@ -296,13 +297,14 @@ int main() {
 
 				break;
 			case 4:
+				int solution[MAXSIZE];
 				arr_sort(ready_queue, n);
 
-				hrn(ready_queue, n);
+				hrn(ready_queue, n,&solution);
 
 				printf("실행 순서 :");
 				for(i = 0; i < n; i++) {
-					printf("  %d  ", ready_queue[i].number);
+					printf("  %d  ", solution[i].number);
 				}
 				printf("\n");
 
