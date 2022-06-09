@@ -176,7 +176,7 @@ int hrn(process *pro,int n,int *solution){
 	char *path = malloc(sizeof(char) * (strlen(OUTPUT_DATA_DIR) + strlen(OUTPUT_HRN_DATA_NAME)) + 2);
 	strcpy(path, OUTPUT_DATA_DIR);
 	strcat(path, "/");
-	strcat(path, OUTPUT_DATA_NAME);
+	strcat(path, OUTPUT_HRN_DATA_NAME);
 
 	if (mkdir(OUTPUT_DATA_DIR, 0755) == -1 && errno != EEXIST) {
 		printf("Can't create directory in: \"%s\"\nError detected: %s\n", OUTPUT_DATA_DIR, strerror(errno));
@@ -186,7 +186,6 @@ int hrn(process *pro,int n,int *solution){
 	
 	if (fp == NULL) {
 		printf("Can't write gantt data in directory: \"%s\"\n", path);
-		return;	
 	}
 
 	// 적는 부분
