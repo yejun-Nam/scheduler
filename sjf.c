@@ -161,7 +161,7 @@ int hrn(process *pro,int n,int *solution){
 			if(pro[i].arrive_t <= time && pro[i].complete != 1){
 
 				// calculate the response ratio
-				printf("%d의 bt %d wt %d",i,pro[i].burst_t,time-pro[i].arrive_t);
+				printf("%d의 bt %d wt %d",i+1,pro[i].burst_t,time-pro[i].arrive_t);
 				temp = (double)(pro[i].burst_t + (time - pro[i].arrive_t)) / pro[i].burst_t;
 				printf("현재 %d 번째 계산중인 temp%f\n",i + 1,temp);
 				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
