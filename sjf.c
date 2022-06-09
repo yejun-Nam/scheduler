@@ -183,7 +183,7 @@ int hrn(process *pro,int n,int *solution){
 
 		pro[loc].complete = 1;
 
-		solution[ac] = loc;
+		solution[ac] = loc + 1;
 		ac += 1; 
 
 	}
