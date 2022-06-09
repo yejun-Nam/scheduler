@@ -267,7 +267,7 @@ int main() {
 					tat = tat + ready_queue[i].ta_t;
 					waitt = waitt + ready_queue[i].wait_t;
 
-					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t);
+					printf("%d     %d     %d      %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t);
 				}
 
 				printf("반환시간 평균 : %.2f\n",tat/n);
