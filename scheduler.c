@@ -1,6 +1,5 @@
 #include "scheduler.h"
-# include <stdio.h>
-# include <stdlib.h>
+
 # define MAXSIZE 1000
 # define MINHRR -9999
 
