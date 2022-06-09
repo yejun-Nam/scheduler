@@ -298,7 +298,7 @@ int main() {
 
 				break;
 			case 4:
-				arr_sort(ready_queue, n);
+				// arr_sort(ready_queue, n);
 
 				hrn(ready_queue, n,solution);
 
