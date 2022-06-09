@@ -315,7 +315,7 @@ int main() {
 				for(i = 0; i < n; i++) {
 					tat = tat + ready_queue[i].ta_t;
 					waitt = waitt + ready_queue[i].wait_t;
-					printf("%d\t%d\t%d\t%d\t%d\t%f\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t ,(double)ready_queue[i].ta_t / ready_queue[i].burst_t[i]);
+					printf("%d\t%d\t%d\t%d\t%d\t%f\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t ,(double)ready_queue[i].ta_t / ready_queue[i].burst_t);
 				}
 				printf("반환시간 평균 : %.2f\n",tat/n);
 				printf("대기시간 평균 : %.2f\n\n",waitt/n);
