@@ -196,7 +196,7 @@ int hrn(process *pro,int n,int *solution){
 	
 	for(int j =0 ; j < n ; j++){
 		for(int m = 0 ; m < pro[solution[j] - 1].burst_t ; m++){
-			fputs(solution[j],fp);
+			fputs((char)solution[j],fp);
 			fputs(" ",fp);
 		}
 	}
