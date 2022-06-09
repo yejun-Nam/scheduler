@@ -1,3 +1,4 @@
+#include "scheduler.h"
 # include <stdio.h>
 # include <stdlib.h>
 # define MAXSIZE 1000
@@ -168,6 +169,30 @@ int hrn(process *pro,int n,int *solution){
 		ac += 1; 
 
 	}
+
+	// write gantt
+	// start_time = arrive_time + waiting_time
+	// state_time 부터 burst time 만큼 프린트해줌 실행순서 순서로
+
+	char *path = malloc(sizeof(char) * (strlen(OUTPUT_DATA_DIR) + strlen(OUTPUT_HRN_DATA_NAME)) + 2);
+	strcpy(path, OUTPUT_DATA_DIR);
+	strcat(path, "/");
+	strcat(path, OUTPUT_DATA_NAME);
+
+	if (mkdir(OUTPUT_DATA_DIR, 0755) == -1 && errno != EEXIST) {
+		printf("Can't create directory in: \"%s\"\nError detected: %s\n", OUTPUT_DATA_DIR, strerror(errno));
+		return;
+	}
+	FILE *fp = fopen(path, "w+");
+	
+	if (fp == NULL) {
+		printf("Can't write gantt data in directory: \"%s\"\n", path);
+		return;	
+	}
+
+	// 적는 부분
+	
+	fputs("asd",fp);
 
 }
 
