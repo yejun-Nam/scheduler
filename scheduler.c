@@ -310,7 +310,7 @@ int main() {
 
 				printf("\n4. Highest Response Ratio Next(HRN) :\n==================== hrn ====================\n");
 
-				printf("P#\tAT\tBT\tWT\tTAT\nNTT");
+				printf("P#\tAT\tBT\tWT\tTAT\tNTT\n");
 
 				for(i = 0; i < n; i++) {
 					tat = tat + ready_queue[i].ta_t;
