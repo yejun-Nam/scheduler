@@ -136,7 +136,7 @@ int hrn(process *pro,int n){
 	int i, j , t , sum_bt = 0;
 	process temp;
 	int sp;
-
+	int loc;
 	for (t = pro[0].arrive_t; t < sum_bt; ){
 		// set the lower limit to response ratio
 		float hrr = -9999;
@@ -149,7 +149,7 @@ int hrn(process *pro,int n){
 		for (i = 0; i < n; i++){
 
 			// check if the process has arrived and is Incomplete
-			if(pro[i].arrive_t <= t && pro[i].complete){
+			if(pro[i].arrive_t <= t && pro[i].complete != 1){
 
 				// calculate the response ratio
 				temp = (pro[i].burst_t + (t - pro[i].arrive_t)) / pro[i].burst_t;
@@ -177,6 +177,8 @@ int hrn(process *pro,int n){
 		//calculation of the turn  around time
 		pro[loc].ta_t = t - pro[loc].arrive_t;
 
+		pro[loc].complete = 1;
+
 	}
 
 }
@@ -200,7 +202,7 @@ int main() {
 		fscanf(fp, "%d", &ready_queue[i].arrive_t);
 		fscanf(fp, "%d", &ready_queue[i].burst_t);
 		fscanf(fp, "%d", &ready_queue[i].priority);
-		&ready_queue[i].complete = false
+		ready_queue[i].complete = 0;
 		index = index + 1;
 		printf("%d\n", index);
 		i++;
