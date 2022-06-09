@@ -295,6 +295,25 @@ int main() {
 
 				hrn(ready_queue, n);
 
+				printf("실행 순서 :");
+				for(i = 0; i < n; i++) {
+					printf("  %d  ", ready_queue[i].number);
+				}
+				printf("\n");
+
+				resort(ready_queue, n);
+
+				printf("\n3. Shortest Job First(SJF) : Non-preemption\n==================== SJF_non ====================\n");
+
+				printf("P#     AT     BT     Pri     WT     TAT\n");
+
+				for(i = 0; i < n; i++) {
+
+					tat = tat + ready_queue[i].ta_t;
+					waitt = waitt + ready_queue[i].wait_t;
+
+					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].priority, ready_queue[i].wait_t, ready_queue[i].ta_t);
+				}
 				continue;
 				break;
 
