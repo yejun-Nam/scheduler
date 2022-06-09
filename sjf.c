@@ -137,7 +137,7 @@ int hrn(process *pro,int n){
 	process temp;
 	int sp;
 	int loc;
-	for (t = pro[0].arrive_t; t < sum_bt; ){
+	for (time = pro[0].arrive_t; t < sum_bt; ){
 		// set the lower limit to response ratio
 		float hrr = -9999;
 
@@ -149,10 +149,10 @@ int hrn(process *pro,int n){
 		for (i = 0; i < n; i++){
 
 			// check if the process has arrived and is Incomplete
-			if(pro[i].arrive_t <= t && pro[i].complete != 1){
+			if(pro[i].arrive_t <= time && pro[i].complete != 1){
 
 				// calculate the response ratio
-				temp = (pro[i].burst_t + (t - pro[i].arrive_t)) / pro[i].burst_t;
+				temp = (pro[i].burst_t + (time - pro[i].arrive_t)) / pro[i].burst_t;
 
 				//checking for the higest response ratio
 
@@ -169,13 +169,13 @@ int hrn(process *pro,int n){
 		}
 
 		// updating the time value
-		t += pro[loc].burst_t;
+		time += pro[loc].burst_t;
 
 		// calculation of the waiting time
-		pro[loc].wait_t = t - pro[loc].arrive_t - pro[loc].burst_t;
+		pro[loc].wait_t = time - pro[loc].arrive_t - pro[loc].burst_t;
 
 		//calculation of the turn  around time
-		pro[loc].ta_t = t - pro[loc].arrive_t;
+		pro[loc].ta_t = time - pro[loc].arrive_t;
 
 		pro[loc].complete = 1;
 
