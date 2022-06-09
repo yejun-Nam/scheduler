@@ -10,6 +10,7 @@ typedef struct process {
 	int priority;    // 우선순위
 	int wait_t;      // 대기시간
 	int ta_t;        // 반환시간 = 실행시간 + 대기시
+	int complete;
 } process;
 
 
@@ -120,14 +121,64 @@ int sjf_non(process *pro, int n) {
 			}
 		}
 	}
-
-
 	// 반환시간, 대기시간
 	for(i = 0; i < n; i++) {
 		sp += pro[i].burst_t;
 		pro[i].ta_t = sp - (pro[i].arrive_t - pro[0].arrive_t);
 		pro[i].wait_t = pro[i].ta_t - pro[i].burst_t;
 	}
+}
+
+// hrn 알고리즘 그때 
+int hrn(process *pro,int n){
+	int time;
+	int ta_avg, wait_avg = 0;
+	int i, j , t , sum_bt = 0;
+	process temp;
+	int sp;
+
+	for (t = pro[0].arrive_t; t < sum_bt; ){
+		// set the lower limit to response ratio
+		float hrr = -9999;
+
+		// The Response Ratio Variable
+		float temp;
+
+		// variable used to store the next process selected
+
+		for (i = 0; i < n; i++){
+
+			// check if the process has arrived and is Incomplete
+			if(pro[i].arrive_t <= t && pro[i].complete){
+
+				// calculate the response ratio
+				temp = (pro[i].burst_t + (t - pro[i].arrive_t)) / pro[i].burst_t;
+
+				//checking for the higest response ratio
+
+				if(hrr < temp){
+
+					// storing the response ratio
+					hrr =temp;
+
+					// storing the location
+
+					loc = i;
+				}
+			}
+		}
+
+		// updating the time value
+		t += pro[loc].burst_t;
+
+		// calculation of the waiting time
+		pro[loc].wait_t = t - pro[loc].arrive_t - pro[loc].burst_t;
+
+		//calculation of the turn  around time
+		pro[loc].ta_t = t - pro[loc].arrive_t;
+
+	}
+
 }
 
 
@@ -137,7 +188,7 @@ int main() {
 	int Q = 0;
 	int index = 0;
 	float tat;
-	float waitt;
+	float waitt;	
 	FILE *fp;
 	fp = fopen("proc.txt","r");
 	process ready_queue[MAXSIZE];
@@ -149,6 +200,7 @@ int main() {
 		fscanf(fp, "%d", &ready_queue[i].arrive_t);
 		fscanf(fp, "%d", &ready_queue[i].burst_t);
 		fscanf(fp, "%d", &ready_queue[i].priority);
+		&ready_queue[i].complete = false
 		index = index + 1;
 		printf("%d\n", index);
 		i++;
@@ -236,8 +288,15 @@ int main() {
 				continue;
 
 				break;
-
 			case 4:
+				arr_sort(ready_queue, n);
+
+				hrn(ready_queue, n);
+
+				continue;
+				break;
+
+			case 5:
 				printf("\n==================== EXIT ===================\n");
 
 				exit(0);
