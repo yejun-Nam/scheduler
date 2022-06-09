@@ -8,7 +8,6 @@ typedef struct process {
 	int number;      // 프로세스 #
 	int arrive_t;    // 도착시간
 	int burst_t;     // 실행시간
-	int priority;    // 우선순위
 	int wait_t;      // 대기시간
 	int ta_t;        // 반환시간 = 실행시간 + 대기시
 	int complete;
@@ -64,20 +63,6 @@ int process_generate(process *pro, int n) {
 	pro[i].number = i + 1;
 	pro[i].burst_t = bt;
 
-	while(1) {
-		pro[i].priority = rand()%50;
-
-		found = 0;
-
-		for(j = 0; j < i; ++j) {
-			if(pro[j].priority == pro[i].priority) {
-				found = 1;
-				break;
-			}
-		}
-
-		if(!found) break;
-	}
 
 	while(1) {
 		pro[i].arrive_t = rand()%50;
@@ -94,7 +79,7 @@ int process_generate(process *pro, int n) {
 		if(!found) break;
 	}
 
-	fprintf(fp2, "\r\n%d %d %d %d", pro[i].number, pro[i].arrive_t, pro[i].burst_t, pro[i].priority);
+	fprintf(fp2, "\r\n%d %d %d %d", pro[i].number, pro[i].arrive_t, pro[i].burst_t);
 
 	fclose(fp2);
 }
@@ -133,9 +118,7 @@ int sjf_non(process *pro, int n) {
 // hrn 알고리즘 그때 
 int hrn(process *pro,int n,int *solution){
 	int time;
-	int ta_avg, wait_avg = 0;
-	int i, j , sum_bt = 0;
-	int sp;
+	int i, sum_bt = 0;
 	int loc;
 	int ac = 0; // solution counter
 	process temp;
@@ -208,7 +191,6 @@ int main() {
 		fscanf(fp, "%d", &ready_queue[i].number);
 		fscanf(fp, "%d", &ready_queue[i].arrive_t);
 		fscanf(fp, "%d", &ready_queue[i].burst_t);
-		fscanf(fp, "%d", &ready_queue[i].priority);
 		index = index + 1;
 		printf("%d\n", index);
 		i++;
@@ -241,7 +223,7 @@ int main() {
 				printf("P#     AT     BT     Pri\n");
 
 				for(i = 0; i < n; i++) {
-					printf("%d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].priority);
+					printf("%d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t);
 				}
 
 				printf("==============================================\n\n\n");
@@ -285,7 +267,7 @@ int main() {
 					tat = tat + ready_queue[i].ta_t;
 					waitt = waitt + ready_queue[i].wait_t;
 
-					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].priority, ready_queue[i].wait_t, ready_queue[i].ta_t);
+					printf("%d     %d     %d     %d     %d     %d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t);
 				}
 
 				printf("반환시간 평균 : %.2f\n",tat/n);
