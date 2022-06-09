@@ -182,7 +182,7 @@ int hrn(process *pro,int n,int *solution){
 		pro[loc].ta_t = time - pro[loc].arrive_t;
 
 		pro[loc].complete = 1;
-
+		printf("loc, %d",loc);
 		solution[ac] = loc + 1;
 		ac += 1; 
 
