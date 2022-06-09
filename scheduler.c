@@ -282,7 +282,7 @@ int main() {
 
 				hrn(ready_queue, n,solution);
 
-				printf("실행 순서 :");
+				printf("\n실행 순서 :");
 				for(i = 0; i < n; i++) {
 					printf("  %d  ", solution[i]);
 				}
