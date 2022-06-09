@@ -131,6 +131,7 @@ int sjf_non(process *pro, int n) {
 
 // hrn 알고리즘 그때 
 int hrn(process *pro,int n){
+	printf("start hrn");
 	int time;
 	int ta_avg, wait_avg = 0;
 	int i, j  , sum_bt = 0;
@@ -140,6 +141,7 @@ int hrn(process *pro,int n){
 
 	for (int k=0; k < n; k++){
 		sum_bt += pro[k].wait_t; 
+		printf("start calculate burst time");
 	}
 
 	for (time = pro[0].arrive_t; time < sum_bt; ){
