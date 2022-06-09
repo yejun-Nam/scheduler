@@ -133,11 +133,16 @@ int sjf_non(process *pro, int n) {
 int hrn(process *pro,int n){
 	int time;
 	int ta_avg, wait_avg = 0;
-	int i, j , t , sum_bt = 0;
+	int i, j  , sum_bt = 0;
 	process temp;
 	int sp;
 	int loc;
-	for (time = pro[0].arrive_t; t < sum_bt; ){
+
+	for (int k=0; k < n; k++){
+		sum_bt += pro[k].wait_t; 
+	}
+
+	for (time = pro[0].arrive_t; time < sum_bt; ){
 		// set the lower limit to response ratio
 		float hrr = -9999;
 
