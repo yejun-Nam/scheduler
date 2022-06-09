@@ -301,7 +301,7 @@ int main() {
 			case 4:
 				arr_sort(ready_queue, n);
 
-				hrn(ready_queue, n,&solution);
+				hrn(ready_queue, n,solution);
 
 				printf("실행 순서 :");
 				for(i = 0; i < n; i++) {
