@@ -178,7 +178,7 @@ int hrn(process *pro,int n){
 
 		// calculation of the waiting time
 		pro[loc].wait_t = time - pro[loc].arrive_t - pro[loc].burst_t;
-		printf("%d",pro[loc].wait_t)
+		printf("%d",pro[loc].wait_t);
 		//calculation of the turn  around time
 		pro[loc].ta_t = time - pro[loc].arrive_t;
 
