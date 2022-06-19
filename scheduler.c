@@ -129,7 +129,7 @@ int sjf_non(process *pro, int n, int *solution) {
 }
 
 // hrn 알고리즘 그때 
-int hrn(process *pro,int n,int *solution_sjf){
+int hrn(process *pro,int n,int *solution){
 	int time;
 	int i, sum_bt = 0;
 	int loc;
