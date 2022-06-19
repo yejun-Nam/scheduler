@@ -129,7 +129,7 @@ int sjf_non(process *pro, int n, int *solution) {
 }
 
 // hrn 알고리즘 그때 
-int hrn(process *pro,int n,int *solution){
+int hrn(process *pro,int n,int *solution_sjf){
 	int time;
 	int i, sum_bt = 0;
 	int loc;
@@ -177,7 +177,7 @@ int hrn(process *pro,int n,int *solution){
 		pro[loc].complete = 1;
 
 		// 실행순서 출력을 위한 배열에 추가
-		solution[ac] = loc + 1;
+		solution_sjf[ac] = loc + 1;
 		ac += 1; 
 
 	}
@@ -295,9 +295,9 @@ int main() {
 
 				sjf_non(ready_queue, n, solution_sjf);
 
-				printf("실행 순서 :");
+				printf("\n실행 순서 :");
 				for(i = 0; i < n; i++) {
-					printf("  %d  ", ready_queue[i].number);
+					printf("  %d  ", solution_sjf[i]);
 				}
 				printf("\n");
 
