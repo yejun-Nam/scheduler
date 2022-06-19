@@ -87,7 +87,7 @@ int process_generate(process *pro, int n) {
 
 
 //sjf 알고리즘(비선점형)
-int sjf_non(process *pro, int n, *solution) {
+int sjf_non(process *pro, int n, int *solution) {
 	int time, sum_bt = 0;
 	int ta_avg, wait_avg = 0;
 	int i, j;
@@ -124,7 +124,7 @@ int sjf_non(process *pro, int n, *solution) {
 
 		// 실행순서 출력을 위한 배열에 추가
 		solution[ac] = loc + 1;
-		ac += 1; 
+		ac += 1;  
 	}
 }
 
