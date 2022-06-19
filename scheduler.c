@@ -91,22 +91,7 @@ int sjf_non(process *pro, int n) {
 	int time, sum_bt = 0;
 	int ta_avg, wait_avg = 0;
 	int i, j;
-	int sp;
-	// 실행시간이 짧은 시간 순서대로 정렬 (처음으로 도착한 프로세스는 제외)
-	// for(i = n - 1; i > 1; i--) {
-	// 	for(j = 1; j < i; j++) {
-	// 		if(pro[j].burst_t > pro[j + 1].burst_t) {
-	// 			temp = pro[j + 1];
-	// 			pro[j + 1] = pro[j];
-	// 			pro[j] = temp;
-	// 		}
-	// 		else if(pro[j].burst_t == pro[j +1].burst_t && pro[j].number > pro[j + 1].number) { // 실행시간이 같을 경우 높은 번호를 뒤로
-	// 			temp = pro[j + 1];
-	// 			pro[j + 1] = pro[j];
-	// 			pro[j] = temp;
-	// 		}
-	// 	}
-	// }
+	
 
 	for (int k=0; k < n; k++){
 		sum_bt += pro[k].burst_t; 
@@ -115,28 +100,27 @@ int sjf_non(process *pro, int n) {
 
 	for (time = pro[0].arrive_t; time < sum_bt; ){
 		float sj = MINSJ;
-		process temp;
+		int loc;
 		for (i = 0; i < n; i++){
 			// 도착한 프로세스가 있고, 완료되지 않았는지 판단
 			if(pro[i].arrive_t <= time && pro[i].complete != 1){
-				if(sj >= pro[i].burst_t){
+				if(sj > pro[i].burst_t){
 					sj = pro[i].burst_t;
-					temp = pro[i];
+					loc = i;
 				}
 			}
 		}
 		// 방금 선택된 프로세스의 burst time 을 이용해 시간 업데이트
-		time += temp.burst_t;
+		time += pro[loc].burst_t;
 
 		// 대기 시간 계산
-		temp.wait_t = time - temp.arrive_t - temp.burst_t;
+		pro[loc].wait_t = time - pro[loc].arrive_t - pro[loc].burst_t;
 		// 반환 시간 계산
-		temp.ta_t = time - temp.arrive_t;
+		pro[loc].ta_t = time - pro[loc].arrive_t;
 
 		// 프로세스 완료 선언
-		temp.complete = 1;
+		pro[loc].complete = 1;
 	}
-	
 }
 
 // hrn 알고리즘 그때 
