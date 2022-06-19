@@ -87,10 +87,11 @@ int process_generate(process *pro, int n) {
 
 
 //sjf 알고리즘(비선점형)
-int sjf_non(process *pro, int n) {
+int sjf_non(process *pro, int n, *solution) {
 	int time, sum_bt = 0;
 	int ta_avg, wait_avg = 0;
 	int i, j;
+	int ac = 0; // solution counter
 	
 
 	for (int k=0; k < n; k++){
@@ -120,6 +121,10 @@ int sjf_non(process *pro, int n) {
 
 		// 프로세스 완료 선언
 		pro[loc].complete = 1;
+
+		// 실행순서 출력을 위한 배열에 추가
+		solution[ac] = loc + 1;
+		ac += 1; 
 	}
 }
 
@@ -221,6 +226,7 @@ int main() {
 	FILE *fp;
 	fp = fopen("sample_process.txt","r");
 	process ready_queue[MAXSIZE];
+	int solution_sjf[MAXSIZE];
 	int solution[MAXSIZE];
 
 
@@ -287,7 +293,7 @@ int main() {
 			case 3:
 				arr_sort(ready_queue, n);
 
-				sjf_non(ready_queue, n);
+				sjf_non(ready_queue, n, solution_sjf);
 
 				printf("실행 순서 :");
 				for(i = 0; i < n; i++) {
