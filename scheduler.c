@@ -177,7 +177,7 @@ int hrn(process *pro,int n,int *solution){
 		pro[loc].complete = 1;
 
 		// 실행순서 출력을 위한 배열에 추가
-		solution_sjf[ac] = loc + 1;
+		solution[ac] = loc + 1;
 		ac += 1; 
 
 	}
