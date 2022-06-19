@@ -305,14 +305,14 @@ int main() {
 
 				printf("\n3. Shortest Job First(SJF) : Non-preemption\n==================== SJF_non ====================\n");
 
-				printf("P#\tAT\tBT\tWT\tTAT\n");
+				printf("P#\tAT\tBT\tWT\tTAT\tNTT\n");
 
 				for(i = 0; i < n; i++) {
 
 					tat = tat + ready_queue[i].ta_t;
 					waitt = waitt + ready_queue[i].wait_t;
 
-					printf("%d\t%d\t%d\t%d\t%d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t);
+					printf("%d\t%d\t%d\t%d\t%d\n", ready_queue[i].number, ready_queue[i].arrive_t, ready_queue[i].burst_t, ready_queue[i].wait_t, ready_queue[i].ta_t, (double)ready_queue[i].ta_t / ready_queue[i].burst_t);
 				}
 
 				printf("반환시간 평균 : %.2f\n",tat/n);
