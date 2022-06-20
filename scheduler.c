@@ -150,7 +150,6 @@ int hrn(process *pro,int n,int *solution){
 		float temp;
 
 		for (i = 0; i < n; i++){
-
 			// 도착한 프로세스가 있고, 완료되지 않았는지 판단
 			if(pro[i].arrive_t <= time && pro[i].complete != 1){
 
@@ -159,7 +158,7 @@ int hrn(process *pro,int n,int *solution){
 				
 				// 방금 계산한 새로운 프로세스가 이전에 가장 컸던 hrr 보다 크다면 업데이트 해준다.
 				if(hrr < temp){
-					hrr =temp;
+					hrr = temp;
 					loc = i;
 				}
 			}
@@ -178,7 +177,7 @@ int hrn(process *pro,int n,int *solution){
 
 		// 실행순서 출력을 위한 배열에 추가
 		solution[ac] = loc + 1;
-		ac += 1; 
+		ac += 1;
 
 	}
 
@@ -291,8 +290,6 @@ int main() {
 				break;
 
 			case 3:
-				arr_sort(ready_queue, n);
-
 				sjf_non(ready_queue, n, solution_sjf);
 
 				printf("\n실행 순서 :");
@@ -300,8 +297,6 @@ int main() {
 					printf("  %d  ", solution_sjf[i]);
 				}
 				printf("\n");
-
-				resort(ready_queue, n);
 
 				printf("\n3. Shortest Job First(SJF) : Non-preemption\n==================== SJF_non ====================\n");
 
@@ -325,15 +320,13 @@ int main() {
 				break;
 			case 4:
 
-				hrn(ready_queue, n,solution);
+				hrn(ready_queue, n, solution);
 
 				printf("\n실행 순서 :");
 				for(i = 0; i < n; i++) {
 					printf("  %d  ", solution[i]);
 				}
 				printf("\n");
-
-				resort(ready_queue, n);
 
 				printf("\n4. Highest Response Ratio Next(HRN) :\n==================== hrn ====================\n");
 
